@@ -4,6 +4,8 @@ x-base_service: &base_service
     volumes:
       - &v1 ./data:/data
       - &v2 ./output:/output
+      - /mnt/data/stable_diffusion/models/main:/data/models/Stable-diffusion
+      - /mnt/data/stable_diffusion/models/lora:/data/models/Lora
     stop_signal: SIGKILL
     tty: true
     deploy:
