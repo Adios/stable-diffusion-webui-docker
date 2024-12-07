@@ -7,6 +7,7 @@ x-base_service: &base_service
       - /mnt/data/stable_diffusion/models/main:/data/models/Stable-diffusion
       - /mnt/data/stable_diffusion/models/lora:/data/models/Lora
       - /mnt/data/stable_diffusion/models/controlnet:/data/models/ControlNet
+      - /mnt/data/stable_diffusion/embeddings:/data/embeddings
     stop_signal: SIGKILL
     tty: true
     deploy:
