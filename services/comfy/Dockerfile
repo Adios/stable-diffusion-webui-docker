@@ -49,7 +49,7 @@ USER $PUID:$PGID
 
 ENV ROOT=/stable-diffusion
 RUN --mount=type=cache,target="$USER_HOME"/.cache/pip \
-  git clone -b v0.5.1 --depth=1 https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
+  git clone -b v0.19.3 --depth=1 https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
   pip install -r ${ROOT}/requirements.txt
 
 RUN git clone --depth=1  https://github.com/Comfy-Org/ComfyUI-Manager ${ROOT}/comfyui-manager && \
