@@ -43,11 +43,26 @@ if [ -d "${ROOT}/comfyui-manager" ]; then
 
   if [ "$manager_exists" = false ]; then
     echo "Initializing ComfyUI-Manager..."
-    # Debug: List contents to see why it wasn't found (optional, can be removed later)
     ls -la "${ROOT}/custom_nodes" || true
     cp -r "${ROOT}/comfyui-manager" "${ROOT}/custom_nodes/comfyui-manager"
   else
     echo "ComfyUI-Manager detected in custom_nodes, skipping initialization."
+  fi
+fi
+
+# ==============================================================================
+# AUTOMATIC DYNAMIC CUSTOM NODE DEPENDENCY SCANNER
+# ==============================================================================
+# Now that the custom_nodes path is successfully symlinked, we verify and satisfy
+# any missing underlying parameters present in the extensions block dynamically.
+# ==============================================================================
+if [ -d "${ROOT}/custom_nodes" ]; then
+  if [ ! -f "/tmp/nodes_scanned.lock" ]; then
+    echo "First boot or container recreation detected. Scanning custom nodes..."
+    find "${ROOT}/custom_nodes/" -maxdepth 3 -name 'requirements.txt' -exec pip install --no-cache-dir -r {} \;
+    touch /tmp/nodes_scanned.lock
+  else
+    echo "Container restart detected. Skipping custom node dependency scan for speed."
   fi
 fi
 
