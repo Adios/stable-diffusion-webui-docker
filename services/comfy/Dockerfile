@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.12.0-cuda13.0-cudnn9-runtime
+FROM pytorch/pytorch:2.13.0-cuda13.2-cudnn9-runtime
 
 # Added PIP_BREAK_SYSTEM_PACKAGES=1 to bypass the externally-managed-environment blocker
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -51,7 +51,7 @@ ENV ROOT=/stable-diffusion
 
 # Install ComfyUI and its basic requirements
 RUN --mount=type=cache,target="$USER_HOME"/.cache/pip \
-  git clone -b v0.20.1 --depth=1 https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
+  git clone -b v0.29.0 --depth=1 https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
   pip install --no-cache-dir -r ${ROOT}/requirements.txt
 
 # ==============================================================================

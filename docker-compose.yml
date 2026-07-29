@@ -89,7 +89,7 @@ services:
     <<: *base_service
     profiles: ["comfy"]
     build: ./services/comfy/
-    image: sd-comfy:12
+    image: sd-comfy:13
     environment:
       - CLI_ARGS=--use-sage-attention
 
