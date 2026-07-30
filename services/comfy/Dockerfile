@@ -52,6 +52,7 @@ ENV ROOT=/stable-diffusion
 # Install ComfyUI and its basic requirements
 RUN --mount=type=cache,target="$USER_HOME"/.cache/pip \
   git clone -b v0.29.0 --depth=1 https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
+  pip install --no-cache-dir --pre torchaudio --index-url https://download.pytorch.org/whl/nightly/cu132 && \
   pip install --no-cache-dir -r ${ROOT}/requirements.txt
 
 # ==============================================================================
